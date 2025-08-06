@@ -107,7 +107,7 @@
   [HeatSource_graphite]
     type = ADJouleHeatingSource
     variable = temperature_graphite
-    elec = potential_graphite
+    heating_term = 'electric_field_heating'
     block = graphite
   []
 
@@ -125,7 +125,7 @@
   [HeatSource_stainless_steel]
     type = ADJouleHeatingSource
     variable = temperature_stainless_steel
-    elec = potential_stainless_steel
+    heating_term = 'electric_field_heating'
     block = stainless_steel
   []
 
@@ -335,6 +335,15 @@
     temperature = temperature_graphite
     block = graphite
   []
+  [electric_heating_material_graphite]
+    type = ElectromagneticHeatingMaterial
+    electric_field = potential_graphite
+    electric_field_heating_name = electric_field_heating
+    electrical_conductivity = electrical_conductivity
+    formulation = 'time'
+    solver = 'electrostatic'
+    block = graphite
+  []
 
   #stainless_steel
   [heat_conductor_stainless_steel]
@@ -351,6 +360,15 @@
   [sigma_stainless_steel]
     type = ADStainlessSteelElectricalConductivity
     temperature = temperature_stainless_steel
+    block = stainless_steel
+  []
+  [electric_heating_material_steel]
+    type = ElectromagneticHeatingMaterial
+    electric_field = potential_stainless_steel
+    electric_field_heating_name = electric_field_heating
+    electrical_conductivity = electrical_conductivity
+    formulation = 'time'
+    solver = 'electrostatic'
     block = stainless_steel
   []
 
